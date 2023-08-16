@@ -14,11 +14,11 @@ public class CopyOnWriteExample {
         list.add(18);
         System.out.println("Размер после добавления " + list.size());
 
-        int iteratorSize = 0;
+        int counter = 0;
         while (iterator.hasNext()){
             iterator.next();
-            iteratorSize++;
+            counter++;
         }
-        System.out.println("Размер итератора " + iteratorSize);
+        System.out.println("Размер итератора " + counter);
     }
 }

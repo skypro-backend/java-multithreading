@@ -1,11 +1,12 @@
 package lesson2.collections;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 public class MapExample {
 
-    private static Map<Integer, Integer> map = new HashMap<>();
+    private static Map<Integer, Integer> map = new Hashtable<>();
 
     public static void main(String[] args) throws InterruptedException {
         long start = System.currentTimeMillis();
@@ -16,7 +17,6 @@ public class MapExample {
                 .toList();
 
         threadList.forEach(Thread::start);
-
         for (Thread thread : threadList) {
             thread.join();
         }
@@ -31,6 +31,8 @@ public class MapExample {
         public void run() {
             for (int i = 0; i < 100_000; i++) {
                 map.put(i, i);
+                int j = map.get(i);
+                j++;
             }
         }
     }

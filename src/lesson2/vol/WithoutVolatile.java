@@ -1,13 +1,15 @@
 package lesson2.vol;
 
+import java.util.function.Supplier;
+
 public class WithoutVolatile extends Thread {
-    private boolean isEnough;
+    private volatile boolean isEnough = true;
 
     @Override
     public void run() {
         int i = 0;
 
-        while (!isEnough) {
+        while (isEnough) {
             i++;
         }
 
@@ -15,7 +17,7 @@ public class WithoutVolatile extends Thread {
     }
 
     private void stopNow() {
-        isEnough = true;
+        isEnough = false;
     }
 
 
@@ -23,7 +25,7 @@ public class WithoutVolatile extends Thread {
         WithoutVolatile withoutVolatile = new WithoutVolatile();
         withoutVolatile.start();
 
-        //Thread.sleep(10);
+        Thread.sleep(10);
 
         withoutVolatile.stopNow();
         System.out.println("Main thread finished");

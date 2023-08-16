@@ -2,14 +2,15 @@ package lesson2.queue;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 
 public class WithQueue implements Parking {
     private static final int PARKING_PLACE_MAX_COUNT = 500;
     private int carCount;
-    private BlockingQueue<Car> blockingQueue;
+    private SynchronousQueue<Car> blockingQueue;
 
     public WithQueue() {
-        this.blockingQueue = new ArrayBlockingQueue<>(PARKING_PLACE_MAX_COUNT);
+        this.blockingQueue = new SynchronousQueue<>();
     }
 
     public void in() {

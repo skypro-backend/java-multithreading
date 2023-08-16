@@ -20,7 +20,9 @@ public class WithReentrantLock {
             double d = Math.random() / Math.random();
 
             reentrantLock.lock();
+
             doubleList.add(d);
+
             reentrantLock.unlock();
         }
 

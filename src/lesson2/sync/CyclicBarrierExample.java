@@ -6,12 +6,13 @@ import java.util.stream.Stream;
 
 public class CyclicBarrierExample {
 
-    private static final int THREAD_COUNT = 5;
-    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_COUNT);
+    private static final int THREAD_COUNT = Runtime.getRuntime().availableProcessors();
+    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(THREAD_COUNT - 1,
+            () -> System.out.println("Release Barrier"));
 
     public static void main(String[] args) {
         Stream.generate(Worker::new)
-                .limit(THREAD_COUNT)
+                .limit(THREAD_COUNT + 2)
                 .map(Thread::new)
                 .forEach(Thread::start);
     }
@@ -24,6 +25,7 @@ public class CyclicBarrierExample {
                 System.out.println("Поток перед барьером");
                 cyclicBarrier.await();
                 System.out.println("Поток после барьера");
+
             } catch (InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
             }

@@ -30,8 +30,10 @@ public class SemaphoreExample {
             try {
                 System.out.println("Поток " + workerId + " перед запросом разрешения");
                 semaphore.acquire();
+
                 System.out.println("Поток " + workerId + " получил разрешение и начал работу");
                 Thread.sleep(2000);
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
