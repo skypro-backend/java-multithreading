@@ -8,10 +8,12 @@ import java.util.stream.Stream;
 
 public class ScheduledExecutorExample {
     public static void main(String[] args) {
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
 
-        executorService.scheduleAtFixedRate(new Worker(), 0, 3, TimeUnit.SECONDS);
-
+        executorService.scheduleAtFixedRate(new Worker(),
+                0,
+                3,
+                TimeUnit.SECONDS);
     }
 
     private static class Worker implements Runnable {
@@ -20,11 +22,11 @@ public class ScheduledExecutorExample {
         public void run() {
             System.out.println("Hello SkyPro");
 
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             System.out.println("I'm done");
         }

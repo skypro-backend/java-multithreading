@@ -1,15 +1,12 @@
 package lesson3.atomic;
 
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class AtomicExample {
 
-    private static int COUNTER = 0;
+    private static AtomicInteger counter = new AtomicInteger(0);
 
     public static void main(String[] args) {
 
@@ -19,6 +16,7 @@ public class AtomicExample {
                 .toList();
 
         threadList.forEach(Thread::start);
+
         threadList.forEach(thread -> {
             try {
                 thread.join();
@@ -27,15 +25,15 @@ public class AtomicExample {
             }
         });
 
-        System.out.println(COUNTER);
+        System.out.println(counter.get());
     }
 
 
     private static class Worker implements Runnable {
         @Override
         public void run() {
-            for (int i = 0; i < 1000; i++) {
-                COUNTER++;
+            for (int i = 0; i < 100_000; i++) {
+                counter.incrementAndGet();
             }
         }
     }

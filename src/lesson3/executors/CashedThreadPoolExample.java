@@ -1,17 +1,21 @@
 package lesson3.executors;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Stream;
 
 public class CashedThreadPoolExample {
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
-        Stream.generate(Worker::new)
-                .limit(20)
-                .map(Thread::new)
-                .forEach(executorService::execute);
+        List<? extends Runnable> runnableList = Stream.generate(Worker::new)
+                .limit(2000)
+                .toList();
+
+        runnableList.forEach(executorService::execute);
 
         executorService.shutdown();
     }

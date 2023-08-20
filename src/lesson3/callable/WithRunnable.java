@@ -30,9 +30,7 @@ public class WithRunnable {
         @Override
         public void run() {
             System.out.println("Thread has started");
-            String someString = WithRunnable.someExternalMethod();
-
-            this.someJson = someString;
+            this.someJson = WithRunnable.someExternalMethod();
         }
 
         public String getSomeJson() {

@@ -1,19 +1,16 @@
 package lesson3.executors;
 
-import lesson2.collections.MapExample;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Stream;
 
 public class FixedThreadPoolExample {
     public static void main(String[] args) {
-        int numOfThreads = 5;
+        int numOfThreads = 3;
         ExecutorService executorService = Executors.newFixedThreadPool(numOfThreads);
 
         Stream.generate(Worker::new)
                 .limit(20)
-                .map(Thread::new)
                 .forEach(executorService::execute);
 
         executorService.shutdown();

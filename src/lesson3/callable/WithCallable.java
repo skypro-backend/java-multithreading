@@ -16,25 +16,14 @@ public class WithCallable {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        Worker callable = new Worker();
-        Future<String> future = executorService.submit(callable);
+        Future<String> future = executorService.submit(WithCallable::someExternalMethod);
 
         System.out.println("Какая-то логика");
 
         String value = future.get();
+        executorService.shutdown();
 
         System.out.println(value);
-    }
-
-
-    private static class Worker implements Callable<String> {
-        @Override
-        public String call() {
-            System.out.println("Thread has started");
-            String someString = WithCallable.someExternalMethod();
-
-            return someString;
-        }
     }
 
 

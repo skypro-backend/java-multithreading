@@ -22,11 +22,11 @@ public class SingleThreadExecutorExample {
         public void run() {
             System.out.println("Hello SkyPro");
 
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+//            try {
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
         }
     }
 }
